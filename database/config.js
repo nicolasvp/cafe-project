@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const messages = require('../utils/messages');
 
 /**
- * Configuración de la conexion a la base de datos utilizando el ODM para mongo 'mongoose'
+ * Configuración de la conexion a la base de datos utilizando el ODM(Object data modeler) para mongo 'mongoose'
  */
 const dbConnection = async() => {
     try {
@@ -9,17 +10,16 @@ const dbConnection = async() => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true,
-            useFindAndModify: false
+            useFindAndModify: false,
         });
 
-        console.log('Database online!');
-
+        console.log(messages.DATABASE_INIT_SUCCESS);
     } catch (error) {
         console.log(error);
-        throw new Error('There is an error initializing the database!');
+        throw new Error(messages.DATABASE_INIT_ERROR);
     }
-}
+};
 
 module.exports = {
-    dbConnection
-}
+    dbConnection,
+};

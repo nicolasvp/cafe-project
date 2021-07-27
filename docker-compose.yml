@@ -1,7 +1,5 @@
-# Para ejecutar con compatibilidad para version 2: docker-compose --compatibility up -d, creará las imagenes si no están creadas y luego las ejecutará
+# Para ejecutar: docker-compose up -d,
 # Para detener: docker-compose stop
-# Para eliminar todo: docker-compose down --remove-orphans
-# Ejecutar builds en paralelo: docker-compose build --parallel, sólo construirá las imagenes, esta manera es más rapida 
 version: '3.7'
 services:
   node-project-db:

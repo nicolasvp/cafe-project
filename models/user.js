@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 /**
  * Definición del Schema de la tabla(collection) Users
@@ -8,16 +8,16 @@ const { Schema, model } = require("mongoose");
 const UserSchema = Schema({
     name: {
         type: String,
-        required: [true, "Field name is mandatory"],
+        required: [true, 'Field name is mandatory'],
     },
     email: {
         type: String,
-        required: [true, "Field email is mandatory"],
+        required: [true, 'Field email is mandatory'],
         unique: true,
     },
     password: {
         type: String,
-        required: [true, "Field password is mandatory"],
+        required: [true, 'Field password is mandatory'],
     },
     img: {
         type: String,
@@ -25,7 +25,7 @@ const UserSchema = Schema({
     role: {
         type: String,
         required: true,
-        emun: ["ADMIN_ROLE", "USER_ROLE"],
+        emun: ['ADMIN_ROLE', 'USER_ROLE'],
     },
     status: {
         type: Boolean,
@@ -53,4 +53,4 @@ UserSchema.methods.toJSON = function() {
 /**
  * Se debe declarar en singular, mongo le añade la s por lo que en la db quedaría Users
  */
-module.exports = model("User", UserSchema);
+module.exports = model('User', UserSchema);

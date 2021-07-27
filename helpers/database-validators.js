@@ -1,19 +1,16 @@
-const Role = require("../models/role");
-const User = require("../models/user");
-
+const Role = require('../models/role');
+const User = require('../models/user');
 
 /**
  * Helper para centralización de validaciones custom
  * Validadores que se utilizan consultando a la base de datos para verificar si los datos de los request ya se encuentran o no en la base de datos
  */
 
-
-
 /**
  * Verifica si el role consultado existe en la base de datos
  * @param {*} role
  */
-const validRole = async(role = "") => {
+const validRole = async(role = '') => {
     const roleExist = await Role.findOne({ role });
 
     // Si no existe el rol en la base de datos, lanza un error indicando que no existe
@@ -26,7 +23,7 @@ const validRole = async(role = "") => {
  * Verifica si el correo consulta existe en la base de datos
  * @param {*} email
  */
-const emailExists = async(email = "") => {
+const emailExists = async(email = '') => {
     // Verificar si el correo existe
     const emailExist = await User.findOne({ email });
 

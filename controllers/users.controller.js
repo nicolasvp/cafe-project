@@ -1,13 +1,10 @@
 // Se declaran response y request desde express para obtener el tipado(metodos) que están en req y res de los parámetros
-const { response, request } = require("express");
+const { response, request } = require('express');
 
 // Dependencia para encriptar un string(password) utilizando bcrypt
-const bcryptjs = require("bcryptjs");
+const bcryptjs = require('bcryptjs');
 
-const User = require("../models/user");
-
-
-
+const User = require('../models/user');
 
 /**
  * Recibe las peticiones realizadas mediante el método GET
@@ -41,7 +38,7 @@ const usersGet = async(req = request, res = response) => {
 
     res.json({
         total,
-        users
+        users,
     });
 };
 
@@ -64,7 +61,7 @@ const usersPost = async(req, res = response) => {
     await user.save();
 
     res.json({
-        user
+        user,
     });
 };
 
@@ -98,7 +95,7 @@ const usersPut = async(req, res = response) => {
  */
 const usersPatch = (req, res = response) => {
     res.json({
-        msg: "API - PATCH method",
+        msg: 'API - PATCH method',
     });
 };
 
