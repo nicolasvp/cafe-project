@@ -21,6 +21,7 @@ const {
     usersDelete,
     usersPatch,
 } = require("../controllers/users.controller");
+
 const messages = require("../utils/messages");
 
 const router = Router();
@@ -72,8 +73,8 @@ router.post(
 router.delete(
     "/:id", [
         validateJWT,
-        //isAdminRole,
-        hasRole("ADMIN_ROLE", "SALES_ROLE", "USER_ROLE"),
+        isAdminRole,
+        //hasRole("ADMIN_ROLE", "SALES_ROLE", "USER_ROLE"),
         check("id", messages.ID_VALIDATION).isMongoId(),
         check("id").custom(userExistById),
         validateFields, // Middleware para verificar los errores

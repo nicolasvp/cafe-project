@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Nicolas\",\r\n    \"email\": \"nicol2as@email.com\",\r\n    \"password\": \"123123\",\r\n    \"role\": \"USER_ROLE\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Nicolas\",\r\n    \"email\": \"nicolas@email.com\",\r\n    \"password\": \"123123\",\r\n    \"role\": \"ADMIN_ROLE\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -68,8 +68,25 @@
 				{
 					"name": "get all user by page",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGZmN2Q2ZDk3NTYyNjM4MjhkYjVlZTQiLCJpYXQiOjE2MjczNTg2NjUsImV4cCI6MTYyNzM3MzA2NX0.vqvF-q3Rc07nRu9rhLG9z_S45s-Q36xcDSX3Z_iLpPc",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGZmN2Q2ZDk3NTYyNjM4MjhkYjVlZTQiLCJpYXQiOjE2MjczNTg2NjUsImV4cCI6MTYyNzM3MzA2NX0.vqvF-q3Rc07nRu9rhLG9z_S45s-Q36xcDSX3Z_iLpPc",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"url": {
 							"raw": "localhost:8080/api/users?from=0&to=15",
 							"host": [
@@ -109,6 +126,52 @@
 								"api",
 								"users",
 								"5ef416d62dd6a32cd0501ce1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nicolas@email.com\",\r\n    \"password\": \"123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
 							]
 						}
 					},
