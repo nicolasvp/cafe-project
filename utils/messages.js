@@ -20,6 +20,11 @@ const messages = {
     USER_NOT_PRESENT: 'User not present in request.',
     INVALID_ROLE: 'Invalid role, your role must be included in valid roles list. ',
     FORBIDDEN_ROLE: 'Forbidden, your role is not admin.',
+    CATEGORY_EXISTS: 'Category already exists. ',
+    PRODUCT_EXISTS: 'Product already exists. ',
+    ALLOWED_COLLECTIONS: 'Allowed collections are: ',
+    INVALID_SEARCH: 'Invalid search',
+    INVALID_MONGO_ID: 'Invalid mongo id'
 };
 
 module.exports = messages;

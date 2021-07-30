@@ -1,5 +1,5 @@
-const Role = require('../models/role');
-const User = require('../models/user');
+const Role = require("../models/role");
+const { User, Category, Product } = require("../models");
 
 /**
  * Helper para centralización de validaciones custom
@@ -10,7 +10,7 @@ const User = require('../models/user');
  * Verifica si el role consultado existe en la base de datos
  * @param {*} role
  */
-const validRole = async(role = '') => {
+const validRole = async(role = "") => {
     const roleExist = await Role.findOne({ role });
 
     // Si no existe el rol en la base de datos, lanza un error indicando que no existe
@@ -23,7 +23,7 @@ const validRole = async(role = '') => {
  * Verifica si el correo consulta existe en la base de datos
  * @param {*} email
  */
-const emailExists = async(email = '') => {
+const emailExists = async(email = "") => {
     // Verificar si el correo existe
     const emailExist = await User.findOne({ email });
 
@@ -46,8 +46,32 @@ const userExistById = async(id) => {
     }
 };
 
+/**
+ * Categorias
+ */
+const categoryExistById = async(id) => {
+    // Verificar si el correo existe
+    const categoryExists = await Category.findById(id);
+    if (!categoryExists) {
+        throw new Error(`El id no existe ${id}`);
+    }
+};
+
+/**
+ * Productos
+ */
+const productExistsById = async(id) => {
+    // Verificar si el correo existe
+    const productExists = await Product.findById(id);
+    if (!productExists) {
+        throw new Error(`El id no existe ${id}`);
+    }
+};
+
 module.exports = {
     validRole,
     emailExists,
     userExistById,
+    categoryExistById,
+    productExistsById,
 };

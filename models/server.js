@@ -1,10 +1,10 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
 
 // Se importa la configuración realizada en el archivo config en el directorio database
-const { dbConnection } = require('../database/config');
+const { dbConnection } = require("../database/config");
 
-const messages = require('../utils/messages');
+const messages = require("../utils/messages");
 
 /**
  * Definición del servidor del API en cual se indican las configuraciones que tendrá
@@ -15,7 +15,7 @@ class Server {
      * Definición de las propiedades del servidor
      * 1. Se define el uso de express
      * 2. Se define el puerto que utilizará, el cual se configura a través del archivo .env
-     * 3. Se define la ruta base del API para usuarios y autenticación
+     * 3. Se define la ruta base del API para usuarios, autenticación, productos y categorias
      * 4. Realiza la conección a la base de datos
      * 5. Setea los middlewares que se aplicarán
      * 6. Setea las rutas del servidor
@@ -23,8 +23,10 @@ class Server {
     constructor() {
         this.app = express();
         this.PORT = process.env.PORT;
-        this.USERS_BASE_PATH = '/api/users';
-        this.AUTH_BASE_PATH = '/api/auth';
+        this.USERS_BASE_PATH = "/api/users";
+        this.AUTH_BASE_PATH = "/api/auth";
+        this.CATEGORIES_BASE_PATH = "/api/categories";
+        this.PRODUCTS_BASE_PATH = "/api/products";
 
         // Conectar a base de datos
         this.connectDB();
@@ -51,7 +53,7 @@ class Server {
         this.app.use(express.json());
 
         // Directorio Público, se indica el directorio que servirá un html
-        this.app.use(express.static('public'));
+        this.app.use(express.static("public"));
     }
 
     /**
@@ -60,8 +62,13 @@ class Server {
      * La ruta definida en la variable 'AUTH_BASE_PATH' para la autenticación
      */
     routes() {
-        this.app.use(this.AUTH_BASE_PATH, require('../routes/auth.routes'));
-        this.app.use(this.USERS_BASE_PATH, require('../routes/users.routes'));
+        this.app.use(this.AUTH_BASE_PATH, require("../routes/auth.routes"));
+        this.app.use(this.USERS_BASE_PATH, require("../routes/users.routes"));
+        this.app.use(
+            this.CATEGORIES_BASE_PATH,
+            require("../routes/categories.routes")
+        );
+        this.app.use(this.PRODUCTS_BASE_PATH, require("../routes/products.routes"));
     }
 
     /**
